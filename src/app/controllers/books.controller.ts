@@ -48,7 +48,6 @@ booksRoutes.delete("/books/:bookId", async (req: Request, res: Response) => {
   const bookId = req.params.bookId;
 
   const book = await Book.findByIdAndDelete(bookId);
-  console.log({ bookId });
 
   res.status(201).json({
     success: true,
