@@ -1,22 +1,29 @@
-import express, { Application, Request, Response } from 'express'
-import { booksRoutes } from './app/controllers/books.controller';
+import express, { Application, Request, Response } from "express";
+import { booksRoutes } from "./app/controllers/books.controller";
+import { borrowRoutes } from "./app/controllers/borrow.controller";
+import { errorHandler } from "./app/middlewares/errorHandler";
 
+const app: Application = express();
 
-const app: Application = express()
-
-app.use(express.json()) 
-
+app.use(express.json());
 
 app.use("/api", booksRoutes);
+app.use("/api", borrowRoutes);
 
+app.get("/", (req: Request, res: Response) => {
+  console.log({ req, res });
+  res.send("Hello Welcome to Library Management System!");
+});
 
+// Handle unknown routes
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
 
-
-
-app.get('/', (req : Request, res: Response) => {
-    console.log({req, res});
-  res.send('Hello Welcome to Library Management System!')
-})
-
+// Global error handler
+app.use(errorHandler);
 
 export default app;
