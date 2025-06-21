@@ -15,7 +15,6 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello Welcome to Library Management System!");
 });
 
-// Handle unknown routes
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -23,7 +22,6 @@ app.use((req, res) => {
   });
 });
 
-// Global error handler
 app.use(errorHandler);
 
 export default app;
