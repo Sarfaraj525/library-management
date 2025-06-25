@@ -33,7 +33,7 @@ booksRoutes.get("/books/:bookId", async (req: Request, res: Response) => {
     book,
   });
 });
-booksRoutes.patch("/books/:bookId", async (req: Request, res: Response) => {
+booksRoutes.put("/books/:bookId", async (req: Request, res: Response) => {
   const bookId = req.params.bookId;
   const updatedBody = req.body;
   const book = await Book.findByIdAndUpdate(bookId, updatedBody, { new: true });
